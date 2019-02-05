@@ -2,4 +2,5 @@
 
 require "./lib/headlines_today"
 
+
 HeadlinesToday::CLI.new.call

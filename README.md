@@ -1,8 +1,6 @@
 # HeadlinesToday
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/headlines_today`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem will allow it's users to see today's news headlines from NPR's website, and they can select to view more about a chosen story, can list headlines again, or exit the program.  #NOFAKENEWS
 
 ## Installation
 
