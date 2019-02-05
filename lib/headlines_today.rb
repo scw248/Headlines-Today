@@ -1,6 +1,4 @@
-require "headlines_today/version"
+require_relative "./headlines_today/version"
+require_relative "./headlines_today/cli"
 
-module HeadlinesToday
-  class Error < StandardError; end
-  # Your code goes here...
-end
+
