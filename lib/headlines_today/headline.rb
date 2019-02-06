@@ -10,15 +10,15 @@ class HeadlinesToday::Headline
         headlines = []
         doc = Nokogiri::HTML(open("https://www.npr.org/?refresh=true"))
   
-        doc.css(".stories-wrap stories-wrap-featured").each do |headline|
+        doc.css("#contentWrap").each do |headline|
           headline = self.new
-          headline.name = doc.css(".title").text.strip
-          binding.pry
+          headline.name = doc.css(".stories-wrap-featured h3.title").first.text
+
           headline.source_url = doc.css(".story-text a").attribute("href").value
           headlines << headline
         end
         headlines
-      end
+    end
 
       def self.scrape_story
         stories = []
@@ -29,6 +29,7 @@ class HeadlinesToday::Headline
             stories << story.css("p")
           end
         end
+        stories
       end
 
 end

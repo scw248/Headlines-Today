@@ -1,6 +1,6 @@
 require "pry"
-require "nokogiri"
 require "open-uri"
+require "nokogiri"
 
 require_relative "./headlines_today/version"
 require_relative "./headlines_today/cli"
