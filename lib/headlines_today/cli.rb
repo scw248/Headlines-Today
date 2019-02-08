@@ -7,8 +7,9 @@ def call
 end
 
 def list_headlines
-   @headlines = HeadlinesToday::Headline.today
+   @headlines = HeadlinesToday::Scraper.new.make_headlines 
    @headlines.each.with_index(1) do |headline, i|
+    # binding.pry
     puts
     puts "#{i}. #{headline.name}"
     puts "#{headline.source_url}"
