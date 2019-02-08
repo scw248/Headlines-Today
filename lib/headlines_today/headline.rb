@@ -17,17 +17,18 @@ class HeadlinesToday::Headline
       @@all
     end
 
-      def story
-         @story ||= HeadlinesToday::Scraper.new.get_story(source_url)
-          .text
-          .gsub("\u2019", "'")
-          .gsub("\u201C","")
-          .gsub("\u201D","")
-          .gsub(/\bFILE\b(.*?)\bREUTERS..........\b/, "")
-          .gsub(/\(.*?\)/, "")
+    def story
+      @story ||= HeadlinesToday::Scraper.new.get_story(source_url)
+        .text
+        .gsub("\u2019", "'")
+        .gsub("\u201C","")
+        .gsub("\u201D","")
+        .gsub(/\bFILE\b(.*?)\bREUTERS\b/, "")
+        .gsub(/\(.*?\)/, "")
+        .gsub(/.+?(?=REUTERS)/, "")
         WordWrap.ww(@story, 150)
-      end
-
+        .partition("   ")
+    end
 
 end
 
