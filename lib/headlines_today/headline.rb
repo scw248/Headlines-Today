@@ -1,28 +1,39 @@
 class HeadlinesToday::Headline
-
+    @@all = []
     attr_accessor :name, :source_url
 
     def self.today
         self.scrape_headlines
     end
 
-    def self.scrape_headlines
-        headlines = []
-
-        doc = Nokogiri::HTML(open("https://www.reuters.com/"))
-
-        doc.css(".group").each do |section|
-          section.css("article.story div.story-content").each do |headline|
-            headline = self.new
-            headline.name = doc.css("a h3.story-title").text
-            headline.source_url = doc.css("article.story div.story-content a").attribute("href").value.gsub("/article", "https://www.reuters.com/article")
-            headlines << headline
-          end
-        end
-        headlines
+    def self.all
+      @@all
     end
 
-    #     doc = Nokogiri::HTML(open("https://www.npr.org/?refresh=true"))
+    def self.scrape_headlines
+        doc = Nokogiri::HTML(open("https://www.reuters.com/"))
+        doc.css("article.story div.story-content h3.story-title").children.map do |h|
+          headline = self.new
+          headline.name = h.text.strip
+          headline.source_url = h.parent.parent.attr('href').gsub("/article", "https://www.reuters.com/article")
+          @@all << headline
+          headline
+        end          
+    end
+
+      def story
+        #binding.pry
+          
+          @story ||= Nokogiri::HTML(open(source_url)).css("div.StandardArticleBody_body").text.gsub("\u2019", "'").gsub("\u201C","").gsub("\u201D","").sub!(/Reporting.*/mi, "")
+      end
+
+
+end
+
+
+#STUFF FOR NPR
+
+  #     doc = Nokogiri::HTML(open("https://www.npr.org/?refresh=true"))
   
     #     doc.css("#contentWrap").each do |headline|
     #       headline = self.new
@@ -33,17 +44,8 @@ class HeadlinesToday::Headline
     #     headlines
     # end
 
-      def self.scrape_story
-        stories = []
-        #binding.pry
-        self.scrape_headlines.each do |headline|
-          doc = Nokogiri::HTML(open("#{headline.source_url}"))
-          
-          doc.css(".story").each do |story|
-            stories << story.css("p")
-          end
-        end
-        stories
-      end
 
-end
+
+    # doc.css(".story").each do |content|
+          #   stories << content.css("p")
+          # end
