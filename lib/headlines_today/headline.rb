@@ -24,7 +24,7 @@ class HeadlinesToday::Headline
       def story
         #binding.pry
           
-          @story ||= Nokogiri::HTML(open(source_url)).css("div.StandardArticleBody_body").text.gsub("\u2019", "'").gsub("\u201C","").gsub("\u201D","").sub!(/Reporting.*/mi, "")
+          @story ||= Nokogiri::HTML(open(source_url)).css("div.StandardArticleBody_body").text.gsub("\u2019", "'").gsub("\u201C","").gsub("\u201D","").gsub(/^[FILE].+[Photo]$/, "").sub!(/Reporting.*/mi, "")
       end
 
 

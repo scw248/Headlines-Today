@@ -9,6 +9,7 @@ end
 def list_headlines
    @headlines = HeadlinesToday::Headline.today
    @headlines.each.with_index(1) do |headline, i|
+    puts
     puts "#{i}. #{headline.name}"
     puts "#{headline.source_url}"
     puts 
@@ -21,7 +22,7 @@ def options
     while input != "exit" 
         puts 
         puts "Type headline number you’d like to read more about, type list to see headlines again, or type exit to leave program:"
-        input = gets.strip.downcase
+        input = gets.chomp.downcase
 
         if input.to_i > 0 && input.to_i < @headlines.count
             puts
