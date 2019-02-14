@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require "./lib/headlines_today"
-
+require './lib/headlines_today'
 
 HeadlinesToday::CLI.new.call
