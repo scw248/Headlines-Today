@@ -2,6 +2,10 @@
 
 This gem will allow it's users to see today's news headlines from Reuters' website, and they can select to view more about a chosen story, can list headlines again, or exit the program.  #NOFAKENEWS
 
+## Demo
+
+https://www.youtube.com/watch?v=YQGyc0mDD6o
+
 ## Installation
 
 Add this line to your application's Gemfile:
